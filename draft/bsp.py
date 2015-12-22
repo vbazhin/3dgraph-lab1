@@ -1,4 +1,6 @@
-def split ((lo, hi)):
+import mpl_triangulation
+
+def split (lambda (lo, hi)):
     w2 = (hi - lo)/2
     return ((lo, lo + w2), (lo + w2, hi))
 

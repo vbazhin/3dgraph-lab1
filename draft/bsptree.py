@@ -1,15 +1,35 @@
+'''
+1. Select a partition plane.
+2. Partition the set of polygons with the plane.
+3. Recurse with each of the two new sets.
+'''
+import mpl_triangulation
+
+def split ():
+    w2 = (hi - lo)/2
+    return ((lo, lo + w2), (lo + w2, hi))
+
+def contains ([la, ra], [lb, rb]):
+    return la <= lb and ra >= rb
+
+def intersects ((la, ra), (lb, rb)):
+    return ra >= lb and rb >= la
+
 class BSPNode(object):
+     __slots__ = ('partition', 'poligons', 'front', 'back', 'leaf')
+
     def __init__(self, ):
-        self.partition = None
-        self.lines = None
+        self.partition = None  #H_PLANE секущая плоскость
+        self.poligons = mpl_triangulation.Polygons.create_triangles(plot=False) #P_LIST список полигонов
+        #Указатели на дочерние узлы и на родителя
         self.front = None
         self.back = None
-        self.node = Triangle
-
+        # self.parent = None
+        self.leaf = Triangle #LEAF указатель на лист
 
 class Triangle(object):
 
-class BSPTree(object):
+class BuildBSPTree(object):
      def __init__(self, rootid):
         self.left = None
         self.right = None
@@ -37,16 +57,15 @@ class BSPTree(object):
 
     public var leftChild:Leaf; // the Leaf's left child Leaf
     public var rightChild:Leaf; // the Leaf's right child Leaf
-    public var room:Rectangle; // the room that is inside this Leaf
+    public var poligon:Triangle; // the poligon that is inside this Leaf
     public var halls:Vector.; // hallways to connect this Leaf to other Leafs
 
-    public function Leaf(X:int, Y:int, Width:int, Height:int)
+    public function Leaf(X:int, Y:int, Z:int)
     {
         // initialize our leaf
         x = X;
         y = Y;
-        width = Width;
-        height = Height;
+        z = Z;
     }
 
     public function split():Boolean
