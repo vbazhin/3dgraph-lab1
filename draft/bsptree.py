@@ -15,6 +15,8 @@ def contains ([la, ra], [lb, rb]):
 def intersects ((la, ra), (lb, rb)):
     return ra >= lb and rb >= la
 
+
+
 class BSPNode(object):
      __slots__ = ('partition', 'poligons', 'front', 'back', 'leaf')
 
@@ -26,6 +28,10 @@ class BSPNode(object):
         self.back = None
         # self.parent = None
         self.leaf = Triangle #LEAF указатель на лист
+
+
+    def finCenter(self):
+
 
 class Triangle(object):
 
