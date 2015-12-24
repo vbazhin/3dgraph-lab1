@@ -5,6 +5,7 @@ def split ((lo, hi)):
 def contains ((la, ra), (lb, rb)):
     return la <= lb and ra >= rb
 
+
 def intersects ((la, ra), (lb, rb)):
     return ra >= lb and rb >= la
 

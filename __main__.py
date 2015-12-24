@@ -1,6 +1,27 @@
 #import mpl_triangulation
 import pprint
+import math
 #findCenter-> Intersect -> Division->  choosePlane-> BSPTree
+
+
+class Vertex(object):
+    __slots__ = ('x', 'y', 'z')
+    def __init__ (self, x=0.0, y=0.0, z=0.0):
+        self.x = float(x)
+        self.y = float(y)
+        self.z = float(z)
+class HPlane(object):
+    __slots__ = ('A', 'B', 'C', 'D')
+    def __init__ (self, A=0.0, B=0.0, C=0.0, D=0.0):
+        self.A = float(A)
+        self.B = float(B)
+        self.C = float(C)
+        self.D = float(D)
+def sign(param):
+    if param >= 0:
+        return 1
+    else:
+        return 0
 
 def findCenter(pList):
     center = {}
@@ -14,10 +35,16 @@ def findCenter(pList):
         center[z] /= (3*len(pList))
     return center
 
-def intersect(poligon, hplane, pList):
+'''сверху от плоскости - положительное расстояние, снизу - отрицательное '''
+def findDistance(vertex, hPlane):
+    t = 1/math.sqrt(pow(hPlane.A,2) + pow(hPlane.B,2) + pow(hPlane.C,2))
+    distance = t * (hPlane.A*vertex.x + hPlane.B*vertex.y + hPlane.C*vertex.z + hPlane.D)
+    return distance
+'''возвращает 2 или 3 полигона'''
+def intersect(poligon, hPlane, pList):
     pass
 
-def division(pList, hplane):
+def division(pList, hPlane):
     pass
 
 def choosePlane(pList):
@@ -63,3 +90,6 @@ if __name__ == '__main__':
   [0.77586545375539373, 0.88561892784689311, 0.0038377191544501921],
   [0.70603836459742109, 0.93207750158170011, 0.6054971963174709]]]
     pprint.pprint(findCenter(pList))
+    v = Vertex(4,3,1)
+    hp = HPlane(3,2,2)
+    pprint.pprint(findDistance(v, hp))
