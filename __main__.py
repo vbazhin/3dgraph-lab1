@@ -1,4 +1,5 @@
 #import mpl_triangulation
+from sympy.geometry import *
 import pprint
 import math
 #findCenter-> Intersect -> Division->  choosePlane-> BSPTree
@@ -17,6 +18,12 @@ class HPlane(object):
         self.B = float(B)
         self.C = float(C)
         self.D = float(D)
+class Poligon(object):
+    __slots__ = ('D1', 'D2', 'D3')
+    def __init__(self, points):
+        self.D1 = Vertex(points[0][0], points[0][1], points[0][2])
+        self.D2 = Vertex(points[1][0], points[1][1], points[1][2])
+        self.D2 = Vertex(points[2][0], points[2][1], points[2][2])
 def sign(param):
     if param >= 0:
         return 1
@@ -42,6 +49,26 @@ def findDistance(vertex, hPlane):
     return distance
 '''возвращает 2 или 3 полигона'''
 def intersect(poligon, hPlane, pList):
+    # проверяем случай разбиения на 2 полигона: если одна из точек принадлежит секущей
+    if hPlane.D == -(hPlane.A*poligon.D1.x + hPlane.B*poligon.D1.y + hPlane.C*poligon.D1.z):
+        pass
+    elif hPlane.D == -(hPlane.A*poligon.D2.x + hPlane.B*poligon.D2.y + hPlane.C*poligon.D2.z):
+        pass
+    elif hPlane.D == -(hPlane.A*poligon.D3.x + hPlane.B*poligon.D3.y + hPlane.C*poligon.D3.z):
+        pass
+
+
+    # TODO Реализовать нахождение точки пересечения
+
+    # иначе разбиваем на 3 полигона
+    # находим тот единственный отрезок, не пересекаемый секущей, знак расстояний до секущей должны быть одинаковыми
+    if sign(findDistance(poligon.D1, hPlane)) ==  sign(findDistance(poligon.D2, hPlane)):
+        pass
+    elif sign(findDistance(poligon.D2, hPlane)) ==  sign(findDistance(poligon.D3, hPlane)):
+        pass
+    else:
+        pass
+
     pass
 
 def division(pList, hPlane):
