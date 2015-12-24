@@ -45,6 +45,5 @@ def create_triangles(plot=False):
     return triangles_coordinates
 
 
-
 if __name__ == '__main__':
     pprint.pprint(create_triangles(plot=False))
