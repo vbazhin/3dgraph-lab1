@@ -1,22 +1,35 @@
 #import mpl_triangulation
 import pprint
+#findCenter-> Intersect -> Division->  choosePlane-> BSPTree
 
-
-def findCenter(polygons):
+def findCenter(pList):
     center = {}
     for z in range(3):
         center[z] = 0
         for y in range(3):
-            for x in range(len(polygons)):
+            for x in range(len(pList)):
                 '''суммируем все координаты сначала по x, потом по у, потом по z'''
-                center[z] += polygons[x][y][z]
+                center[z] += pList[x][y][z]
         '''формируем усредненную координату всех вершин полигонов'''
-        center[z] /= (3*len(polygons))
+        center[z] /= (3*len(pList))
     return center
 
+def intersect(poligon, hplane, pList):
+    pass
+
+def division(pList, hplane):
+    pass
+
+def choosePlane(pList):
+    pass
+
+def BSPTree(pList):
+    pass
+
+
 if __name__ == '__main__':
-    # polygons = mpl_triangulation.Polygons().create_triangles(plot=False)
-    polygons = [[[0.010703950112349703, 0.31750267022044021, 0.044739447260041976],
+    # pList = mpl_triangulation.Polygons().create_triangles(plot=False)
+    pList = [[[0.010703950112349703, 0.31750267022044021, 0.044739447260041976],
   [0.61545986162699373, 0.031921025441535633, 0.61046017478947368],
   [0.46970634241017262, 0.56238191601151766, 0.75962217347960725]],
  [[0.46970634241017262, 0.56238191601151766, 0.75962217347960725],
@@ -49,4 +62,4 @@ if __name__ == '__main__':
  [[0.68137975038977416, 0.8078251531730366, 0.73276826612932977],
   [0.77586545375539373, 0.88561892784689311, 0.0038377191544501921],
   [0.70603836459742109, 0.93207750158170011, 0.6054971963174709]]]
-    pprint.pprint(findCenter(polygons))
+    pprint.pprint(findCenter(pList))
