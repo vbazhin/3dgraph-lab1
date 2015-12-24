@@ -2,7 +2,7 @@
 
 from matplotlib.tri import Triangulation
 import matplotlib.pyplot as plt
-import numpy as np
+# import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 import pprint
 import random
@@ -26,9 +26,9 @@ def create_triangles(plot=False):
         ]
         for i in range(POINTS_NUM)
     ]
-    points = np.array(points)
+#    points = np.array(points)
     triangles_points = lambda points, triangles: [
-        [points[a], points[b], points[c]]
+        [list(points[a]), list(points[b]), list(points[c])]
         for a, b, c in triangles
         ]
     triangles_coordinates = triangles_points(points, triangles.triangles)
@@ -47,4 +47,4 @@ def create_triangles(plot=False):
 
 
 if __name__ == '__main__':
-    pprint.pprint(create_triangles(plot=True))
+    pprint.pprint(create_triangles(plot=False))
