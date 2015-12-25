@@ -56,7 +56,7 @@ def findIntersection(v1, v2, hPlane):
         x = v1.x + t*(v2.x-v1.x)
         y = v1.y + t*(v2.y-v1.y)
         z = v1.z + t*(v2.z-v1.z)
-        return [x, y, z]
+        return Vertex(x, y, z)
     else:
         return False
     #http://youclever.org/book/koordinaty-i-vektory-2
@@ -64,11 +64,11 @@ def findIntersection(v1, v2, hPlane):
 def intersect(poligon, hPlane, pList):
     # проверяем случай разбиения на 2 полигона: если одна из точек принадлежит секущей
     if hPlane.D == -(hPlane.A*poligon.D1.x + hPlane.B*poligon.D1.y + hPlane.C*poligon.D1.z):
-        pass
+        intersectPoint = findIntersection(poligon.D2, poligon.D3, hPlane)
     elif hPlane.D == -(hPlane.A*poligon.D2.x + hPlane.B*poligon.D2.y + hPlane.C*poligon.D2.z):
-        pass
+        intersectPoint = findIntersection(poligon.D1, poligon.D3, hPlane)
     elif hPlane.D == -(hPlane.A*poligon.D3.x + hPlane.B*poligon.D3.y + hPlane.C*poligon.D3.z):
-        pass
+        intersectPoint = findIntersection(poligon.D1, poligon.D2, hPlane)
 
 
     # TODO Реализовать нахождение точки пересечения
@@ -136,4 +136,6 @@ if __name__ == '__main__':
     v2 = Vertex(7,0.5,0)
     pprint.pprint(findDistance(v1, hp))
     pprint.pprint(findDistance(v2, hp))
-    print(findIntersection(v1,v2,hp))
+    p = Vertex()
+    p = findIntersection(v1,v2,hp)
+    print(p.y)
