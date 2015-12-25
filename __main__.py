@@ -1,5 +1,5 @@
 #import mpl_triangulation
-from sympy.geometry import *
+#from sympy.geometry import *
 import pprint
 import math
 #findCenter-> Intersect -> Division->  choosePlane-> BSPTree
@@ -47,6 +47,19 @@ def findDistance(vertex, hPlane):
     t = 1/math.sqrt(pow(hPlane.A,2) + pow(hPlane.B,2) + pow(hPlane.C,2))
     distance = t * (hPlane.A*vertex.x + hPlane.B*vertex.y + hPlane.C*vertex.z + hPlane.D)
     return distance
+
+def findIntersection(v1, v2, hPlane):
+    num = -(hPlane.D + hPlane.A*v1.x + hPlane.B*v1.y + hPlane.C*v1.z)
+    denom = hPlane.A*(v2.x-v1.x) + hPlane.B*(v2.y-v1.y) + hPlane.C*(v2.z-v1.z)
+    t = num/denom
+    if t<1 and t>0:
+        x = v1.x + t*(v2.x-v1.x)
+        y = v1.y + t*(v2.y-v1.y)
+        z = v1.z + t*(v2.z-v1.z)
+        return [x, y, z]
+    else:
+        return False
+    #http://youclever.org/book/koordinaty-i-vektory-2
 '''возвращает 2 или 3 полигона'''
 def intersect(poligon, hPlane, pList):
     # проверяем случай разбиения на 2 полигона: если одна из точек принадлежит секущей
@@ -118,5 +131,9 @@ if __name__ == '__main__':
   [0.70603836459742109, 0.93207750158170011, 0.6054971963174709]]]
     pprint.pprint(findCenter(pList))
     v = Vertex(4,3,1)
-    hp = HPlane(3,2,2)
-    pprint.pprint(findDistance(v, hp))
+    hp = HPlane(-1,-2,1,5)
+    v1 = Vertex(0.5,0.5,0)
+    v2 = Vertex(7,0.5,0)
+    pprint.pprint(findDistance(v1, hp))
+    pprint.pprint(findDistance(v2, hp))
+    print(findIntersection(v1,v2,hp))
